@@ -9,19 +9,24 @@ import {
   Calculator, 
   Sparkles,
   MapPin,
-  Search
+  Search,
+  ShoppingBag
 } from 'lucide-react';
 
 interface NavbarProps {
   onNavigate: (sectionId: string) => void;
   onOpenCalculator: () => void;
   onFocusSearch: () => void;
+  cartCount?: number;
+  onOpenCart?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ 
   onNavigate, 
   onOpenCalculator,
-  onFocusSearch 
+  onFocusSearch,
+  cartCount = 0,
+  onOpenCart
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -120,7 +125,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           {/* Action CTAs */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2.5">
             <button
               id="nav-search-shortcut-btn"
               onClick={onFocusSearch}
@@ -137,11 +142,27 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-calc-btn"
               onClick={onOpenCalculator}
-              className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100/80 rounded-lg border border-blue-200/60 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100/80 rounded-lg border border-blue-200/60 transition-colors"
             >
               <Calculator className="w-4 h-4 text-blue-600" />
               <span>Calculadora m²</span>
             </button>
+
+            {onOpenCart && (
+              <button
+                id="nav-cart-btn"
+                onClick={onOpenCart}
+                className="relative flex items-center gap-1.5 px-3.5 py-2 text-xs font-black text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300/80 rounded-lg transition-all shadow-2xs"
+              >
+                <ShoppingBag className="w-4 h-4 text-emerald-600" />
+                <span>Comprar / Carrito</span>
+                {cartCount > 0 && (
+                  <span className="ml-1 px-1.5 py-0.2 bg-emerald-600 text-white rounded-full text-[10px] font-black animate-pulse">
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+            )}
 
             <button
               id="nav-quote-cta-btn"
@@ -154,7 +175,22 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Mobile hamburger button */}
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-1.5 md:hidden">
+            {onOpenCart && (
+              <button
+                id="mobile-cart-btn"
+                onClick={onOpenCart}
+                className="relative p-2 text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg"
+                aria-label="Abrir Carrito"
+              >
+                <ShoppingBag className="w-5 h-5" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-600 text-white rounded-full text-[10px] font-black flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+            )}
             <button
               id="mobile-calc-quick-btn"
               onClick={onOpenCalculator}

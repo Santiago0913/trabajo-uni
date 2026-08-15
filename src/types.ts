@@ -82,3 +82,103 @@ export interface QuoteRequest {
   notes: string;
   contactPreference: 'whatsapp' | 'llamada' | 'email';
 }
+
+export interface CartItem {
+  id: string;
+  product: PaintProduct;
+  size: PaintPresentation;
+  color: ColorSwatch;
+  quantity: number;
+  unitPrice: number;
+}
+
+export type DocumentType = 'CC' | 'CE' | 'NIT' | 'PAS' | 'PPT';
+
+export type PaymentMethodType = 'PSE' | 'CARD' | 'NEQUI_DAVIPLATA' | 'CASH_ON_DELIVERY';
+
+export interface BankOption {
+  code: string;
+  name: string;
+  popular?: boolean;
+  type: 'bank' | 'fintech' | 'coop';
+  icon?: string;
+}
+
+export interface CheckoutFormState {
+  // Identity
+  docType: DocumentType;
+  docNumber: string;
+  fullName: string;
+  email: string;
+  phone: string;
+
+  // Delivery Address
+  department: string;
+  city: string;
+  addressLine1: string; // Ej: Carrera 43A # 18 Sur - 135
+  addressDetails: string; // Ej: Apto 502, Torre 3, Edificio Los Sauces
+  neighborhood: string; // Barrio
+  deliveryNotes: string; // Instrucciones portería / horario
+
+  // Electronic Invoicing (DIAN)
+  requireElectronicInvoice: boolean;
+  businessName: string;
+  nit: string;
+  invoiceEmail: string;
+
+  // Payment
+  paymentMethod: PaymentMethodType;
+  pseBankCode: string;
+  psePersonType: 'NATURAL' | 'JURIDICA';
+  pseUserEmail: string;
+
+  // Card details (if CARD)
+  cardNumber: string;
+  cardHolderName: string;
+  cardExpiry: string;
+  cardCvv: string;
+  cardInstallments: number;
+
+  // Nequi / Daviplata details
+  walletPhone: string;
+
+  // Legal Acceptance
+  acceptDataPolicy: boolean;
+  acceptTerms: boolean;
+}
+
+export interface OrderConfirmation {
+  orderId: string;
+  trackingNumber: string;
+  date: string;
+  status: 'APROBADO' | 'EN_PREPARACION' | 'DESPACHADO';
+  customer: {
+    fullName: string;
+    docType: DocumentType;
+    docNumber: string;
+    email: string;
+    phone: string;
+  };
+  shippingAddress: {
+    department: string;
+    city: string;
+    addressLine1: string;
+    addressDetails: string;
+    neighborhood: string;
+    deliveryNotes?: string;
+  };
+  items: CartItem[];
+  payment: {
+    method: PaymentMethodType;
+    methodLabel: string;
+    bankOrFranchise?: string;
+    approvalCode: string;
+    installments?: number;
+    subtotal: number;
+    shippingCost: number;
+    discount: number;
+    taxIva: number;
+    total: number;
+  };
+  estimatedDeliveryDate: string;
+}

@@ -11,7 +11,8 @@ import {
   Calculator, 
   Layers, 
   Star,
-  Check
+  Check,
+  ShoppingBag
 } from 'lucide-react';
 
 interface PaintDetailModalProps {
@@ -19,13 +20,15 @@ interface PaintDetailModalProps {
   onClose: () => void;
   onOpenCalculator: (product: PaintProduct) => void;
   onSelectForQuote: (product: PaintProduct, size: PaintPresentation, color: ColorSwatch) => void;
+  onBuyProduct: (product: PaintProduct, size: PaintPresentation, color: ColorSwatch) => void;
 }
 
 export const PaintDetailModal: React.FC<PaintDetailModalProps> = ({
   product,
   onClose,
   onOpenCalculator,
-  onSelectForQuote
+  onSelectForQuote,
+  onBuyProduct
 }) => {
   if (!product) return null;
 
@@ -214,19 +217,32 @@ export const PaintDetailModal: React.FC<PaintDetailModalProps> = ({
             className="w-full sm:w-auto px-4 py-2.5 text-xs font-bold text-slate-700 bg-white hover:bg-slate-100 rounded-xl border border-slate-300 flex items-center justify-center gap-1.5"
           >
             <Calculator className="w-4 h-4 text-blue-600" />
-            <span>Calcular Galones para Mi Espacio</span>
+            <span>Calcular Galones</span>
           </button>
 
-          <button
-            onClick={() => {
-              onSelectForQuote(product, selectedSize, selectedColor);
-              onClose();
-            }}
-            className="w-full sm:w-auto px-6 py-2.5 text-xs font-extrabold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-md flex items-center justify-center gap-2"
-          >
-            <Sparkles className="w-4 h-4 text-amber-300" />
-            <span>Cotizar con {product.name}</span>
-          </button>
+          <div className="w-full sm:w-auto flex flex-col sm:flex-row items-center gap-2">
+            <button
+              onClick={() => {
+                onSelectForQuote(product, selectedSize, selectedColor);
+                onClose();
+              }}
+              className="w-full sm:w-auto px-4 py-2.5 text-xs font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-xl border border-blue-200 flex items-center justify-center gap-1.5"
+            >
+              <span>Cotizar Mano de Obra</span>
+            </button>
+
+            <button
+              id="btn-modal-buy-now"
+              onClick={() => {
+                onBuyProduct(product, selectedSize, selectedColor);
+                onClose();
+              }}
+              className="w-full sm:w-auto px-6 py-2.5 text-xs font-black text-white bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 rounded-xl shadow-md flex items-center justify-center gap-2"
+            >
+              <ShoppingBag className="w-4 h-4" />
+              <span>Comprar Online • {formatCOP(priceObj.price)}</span>
+            </button>
+          </div>
         </div>
 
       </div>
