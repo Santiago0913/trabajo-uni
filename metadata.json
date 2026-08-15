@@ -1,0 +1,6 @@
+{
+  "name": "Pintuko - Pintura Profesional",
+  "description": "Sitio web interactivo para servicios de pintura profesional, catálogo de envases de pintura con precios, galería interactiva con filtros y cotizador de proyectos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
