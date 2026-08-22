@@ -9,6 +9,7 @@ import {
   Heart,
   ArrowUp
 } from 'lucide-react';
+import { OFFICIAL_WHATSAPP_URL } from '../utils/constants';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -105,9 +106,16 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenCalculator }) 
                 <Phone className="w-3.5 h-3.5 text-blue-400" />
                 <span>+57 (601) 745-9800</span>
               </li>
-              <li className="flex items-center gap-2">
-                <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
-                <span>+57 312 456 7890</span>
+              <li>
+                <a 
+                  href={OFFICIAL_WHATSAPP_URL} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="flex items-center gap-2 hover:text-emerald-400 transition-colors"
+                >
+                  <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>WhatsApp Oficial: Chatear Aquí</span>
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-amber-400" />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { OrderConfirmation } from '../types';
 import { formatCOP } from '../utils/formatters';
+import { OFFICIAL_WHATSAPP_URL } from '../utils/constants';
 import { 
   CheckCircle, 
   X, 
@@ -195,7 +196,7 @@ export const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({
 
           <div className="w-full sm:w-auto flex items-center gap-2">
             <a
-              href={`https://wa.me/573124567890?text=${whatsappMessage}`}
+              href={OFFICIAL_WHATSAPP_URL}
               target="_blank"
               rel="noreferrer"
               className="flex-1 sm:flex-initial px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-xs transition-colors"

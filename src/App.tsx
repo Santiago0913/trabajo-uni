@@ -25,6 +25,7 @@ import {
 } from './types';
 import { MessageSquare, Phone, Sparkles, ArrowUp, ShoppingBag } from 'lucide-react';
 import { formatCOP } from './utils/formatters';
+import { OFFICIAL_WHATSAPP_URL } from './utils/constants';
 
 export default function App() {
   // Search & Filter state
@@ -296,7 +297,7 @@ export default function App() {
         {/* Floating WhatsApp Quick Button */}
         <a
           id="floating-whatsapp-btn"
-          href="https://wa.me/573124567890?text=Hola%20Pintuko,%20deseo%20asesor%C3%ADa%20y%20cotizaci%C3%B3n%20de%20pintura"
+          href={OFFICIAL_WHATSAPP_URL}
           target="_blank"
           rel="noreferrer"
           className="group flex items-center gap-2.5 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white font-bold px-4 py-3 rounded-full shadow-2xl hover:scale-105 transition-all shadow-emerald-500/40"

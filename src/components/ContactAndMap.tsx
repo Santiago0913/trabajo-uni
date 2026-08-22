@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { COMPANY_LOCATIONS, SERVICE_BENEFITS } from '../data/mockData';
 import { formatCOP } from '../utils/formatters';
+import { OFFICIAL_WHATSAPP_URL } from '../utils/constants';
 import { 
   MapPin, 
   Phone, 
@@ -76,10 +77,7 @@ export const ContactAndMap: React.FC<ContactAndMapProps> = ({
   };
 
   const handleOpenWhatsAppDirect = () => {
-    const text = encodeURIComponent(
-      `¡Hola Pintuko! 👋 Deseo cotizar un servicio de pintura profesional:\n- *Nombre:* ${fullName || 'Cliente'}\n- *Ciudad:* ${city}\n- *Tipo de Proyecto:* ${projectType}\n- *Área aprox.:* ${areaM2} m²\n- *Pintura:* ${initialProduct}\n- *Notas:* ${notes || 'Solicito visita técnica'}`
-    );
-    window.open(`https://wa.me/573124567890?text=${text}`, '_blank');
+    window.open(OFFICIAL_WHATSAPP_URL, '_blank');
   };
 
   return (
@@ -338,6 +336,19 @@ export const ContactAndMap: React.FC<ContactAndMapProps> = ({
                   <Phone className="w-4 h-4 text-amber-400 shrink-0" />
                   <a href={`tel:${selectedLocation.phone.replace(/[^0-9+]/g, '')}`} className="hover:text-blue-300 transition-colors">
                     {selectedLocation.phone}
+                  </a>
+                </div>
+
+                <div className="flex items-center gap-2.5 text-xs text-slate-300">
+                  <MessageSquare className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <a 
+                    href={OFFICIAL_WHATSAPP_URL} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors flex items-center gap-1"
+                  >
+                    <span>WhatsApp: Chatear con un Asesor</span>
+                    <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>
 

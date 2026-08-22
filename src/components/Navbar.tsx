@@ -12,6 +12,7 @@ import {
   Search,
   ShoppingBag
 } from 'lucide-react';
+import { OFFICIAL_WHATSAPP_URL } from '../utils/constants';
 
 interface NavbarProps {
   onNavigate: (sectionId: string) => void;
@@ -71,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>(601) 745-9800</span>
             </a>
             <a 
-              href="https://wa.me/573124567890?text=Hola%20Pintuko,%20quiero%20cotizar%20un%20servicio%20de%20pintura" 
+              href={OFFICIAL_WHATSAPP_URL} 
               target="_blank" 
               rel="noreferrer"
               className="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-medium transition-colors"

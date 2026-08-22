@@ -9,6 +9,7 @@ import {
   FileCheck
 } from 'lucide-react';
 import { formatCOP } from '../utils/formatters';
+import { OFFICIAL_WHATSAPP_URL } from '../utils/constants';
 
 interface QuoteSuccessModalProps {
   isOpen: boolean;
@@ -24,10 +25,7 @@ export const QuoteSuccessModal: React.FC<QuoteSuccessModalProps> = ({
   if (!isOpen || !data) return null;
 
   const handleWhatsApp = () => {
-    const text = encodeURIComponent(
-      `¡Hola Pintuko! Acabo de enviar una solicitud de cotización para ${data.fullName || 'mi proyecto'}:\n- Ciudad: ${data.city}\n- Proyecto: ${data.projectType}\n- Área: ${data.areaM2} m²\n- Estimado: ${formatCOP(data.estimatedTotal || 0)} COP`
-    );
-    window.open(`https://wa.me/573124567890?text=${text}`, '_blank');
+    window.open(OFFICIAL_WHATSAPP_URL, '_blank');
   };
 
   return (
